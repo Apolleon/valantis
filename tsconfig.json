@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "es2015",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src/**/*"]
+}

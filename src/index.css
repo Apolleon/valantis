@@ -1,0 +1,83 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+button,
+input,
+button:focus,
+input:focus {
+  outline: none;
+}
+
+.sliding-button {
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+  position: relative;
+  padding: 15px 30px;
+  border: 1px solid;
+  border-image: linear-gradient(180deg, #ff3000, #ed0200, #ff096c, #d50082);
+  border-image-slice: 1;
+  margin: 10px 20px;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  overflow: hidden;
+  letter-spacing: 2px;
+  transition: 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.spin-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+.spinner {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  border: 3px solid transparent;
+  border-top-color: #a04668;
+  top: 50%;
+  left: 50%;
+  margin: -30px;
+  border-radius: 50%;
+  animation: spin 2s linear infinite;
+}
+
+.spinner:before,
+.spinner:after {
+  content: "";
+  position: absolute;
+  border: 3px solid transparent;
+  border-radius: 50%;
+}
+
+.spinner:before {
+  border-top-color: #254e70;
+  top: -12px;
+  left: -12px;
+  right: -12px;
+  bottom: -12px;
+  animation: spin 3s linear infinite;
+}
+
+.spinner:after {
+  border-top-color: black;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

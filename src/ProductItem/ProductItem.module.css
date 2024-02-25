@@ -1,0 +1,15 @@
+.item {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 3fr 1fr 1fr;
+  height: max-content;
+  min-height: 30px;
+  background-color: gray;
+  color: white;
+  margin-bottom: 10px;
+  text-align: center;
+  align-items: center;
+  font-size: larger;
+  font-weight: 600;
+  padding: 10px 0;
+}

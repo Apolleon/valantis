@@ -1,0 +1,26 @@
+.list {
+  position: relative;
+  cursor: pointer;
+  background-color: white;
+  width: 25%;
+  border: 2px solid lightgray;
+  min-height: 100%;
+}
+
+.list_title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.list_block {
+  position: absolute;
+  border: 2px solid black;
+  width: 100%;
+  background-color: white;
+  max-height: 400px;
+  overflow: auto;
+  top: 100%;
+}
