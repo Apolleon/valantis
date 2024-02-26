@@ -1,40 +1,26 @@
-import React, { FC, useEffect, useState, memo, useContext } from "react";
+import React, { FC, memo, useContext } from "react";
 import OptionsList from "./OptionsList/OptionsList.tsx";
-import { getCustomApi } from "../helpers/getCustomApi.ts";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AppContext } from "../Home/Home.tsx";
-import { getFilteredProductsApi } from "../helpers/getFilteredProductsApi.ts";
+import { useCustomApi } from "../hooks/useCustomApi.js";
 
 import styles from "./Filter.module.css";
 
+const pricesConfigs = {
+  action: "get_fields",
+  params: { field: "price" },
+};
+
+const brandsConfigs = {
+  action: "get_fields",
+  params: { field: "brand" },
+};
+
 const Filter: FC = () => {
-  const { page = 0 } = useParams();
-  const { filters, setFilters, setProducts } = useContext(AppContext);
-  const [priceOptions, setPriceOptions] = useState<number[] | []>([]);
-  const [brandOptions, setBrandOptions] = useState<string[] | []>([]);
+  const { filters, setFilters } = useContext(AppContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const priceData = await getCustomApi({
-        action: "get_fields",
-        params: { field: "price" },
-      });
-
-      const uniquePrice = [...new Set<number>(priceData)].sort((a, b) => a - b);
-      setPriceOptions(uniquePrice);
-
-      const brandData = await getCustomApi({
-        action: "get_fields",
-        params: { field: "brand" },
-      });
-
-      const uniqueBrand = [...new Set<string>(brandData)];
-      setBrandOptions(uniqueBrand);
-    };
-
-    fetchData();
-  }, [page]);
+  const priceData = useCustomApi(pricesConfigs);
+  const brandData = useCustomApi(brandsConfigs);
 
   const handleChange = (value: string | number | null, name: string) => {
     if (!value) filters.delete(name);
@@ -61,12 +47,12 @@ const Filter: FC = () => {
         className={styles.filter_input}
       />
       <OptionsList
-        items={priceOptions}
+        items={[...new Set<number>(priceData)]}
         filterName="price"
         handleChange={handleChange}
       />
       <OptionsList
-        items={brandOptions}
+        items={[...new Set<string>(brandData)]}
         filterName="brand"
         handleChange={handleChange}
       />
